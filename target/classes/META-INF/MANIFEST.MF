@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: user
+Build-Jdk: 17.0.6
+Implementation-Title: spring-boot-social-login
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: fr.nchantreau
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/spring-boot-social-login
+Created-By: Maven Integration for Eclipse
+

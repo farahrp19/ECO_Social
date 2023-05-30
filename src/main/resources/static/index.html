@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Demo</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width" />
+<base href="/" />
+
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+
+     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<style>
+	body {
+  background-image: url("https://images.squarespace-cdn.com/content/v1/56bcfb20555986c2b888b680/1456705505985-C4WR7SB2KUBHSGBB89VU/bean-sprout.jpg");
+  
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+.btn-google {
+  color: white !important;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white !important;
+  background-color: #3b5998;
+}
+</style>
+</head>
+<body>
+    
+    
+        <!--<div>
+             <a class="btn btn-primary fa fa-facebook" href="/login/facebook">&nbsp;&nbsp;continue with facebook</a>
+        </div><br>-->
+      <!--<div>
+            With Github: <a href="/login/github">click here</a>
+        </div>-->
+       <!-- <div>
+             <a class="btn btn-success fa fa-google" href="/login/google">&nbsp;&nbsp;continue with google</a>
+        </div>
+        -->
+               
+             
+        
+        
+        <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h3 class="card-title text-center mb-5  fs-5"><b><em>Login Here</em></b></h3>
+            <form>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                <label class="form-check-label" for="rememberPasswordCheck">
+                  Remember password
+                </label>
+              </div>
+              <div class="d-grid">
+                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Login</button>
+              </div>
+              <hr class="my-4">
+              <div class="d-grid mb-2">
+                            <a class="btn btn-success fa fa-google" href="/login/google">&nbsp;&nbsp;continue with google</a>
+              </div>
+              <div class="d-grid">
+                    <a class="btn btn-danger fa fa-facebook" href="/login/facebook">&nbsp;&nbsp;continue with facebook</a>
+                
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container authenticated" style="display: none">
+        Logged in as: <span id="user"></span>
+        <div>
+            <button onClick="logout()" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <script type="text/javascript">
+          $.ajaxSetup({
+            beforeSend : function(xhr, settings) {
+              if (settings.type == 'POST' || settings.type == 'PUT'
+                  || settings.type == 'DELETE') {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                    .test(settings.url))) {
+                  // Only send the token to relative URLs i.e. locally.
+                  xhr.setRequestHeader("X-XSRF-TOKEN", Cookies
+                      .get('XSRF-TOKEN'));
+                }
+              }
+            }
+          });
+          $.get("/user", function(data) {
+            $("#user").html(data.name);
+            if (data.name == undefined) {
+              logout();
+            }else{
+              $(".unauthenticated").hide();
+              $(".authenticated").show();
+            }
+          });
+          var logout = function() {
+            $.post("/logout", function() {
+              $("#user").html('');
+              $(".unauthenticated").show();
+              $(".authenticated").hide();
+            })
+            return true;
+          }
+        </script>
+</body>
+</html>
